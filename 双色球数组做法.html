@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>双色球数组做法</title>
+    </head>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <style>
+        li{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            float: left;
+            margin: 15px;
+            text-align: center;
+            line-height: 150px;
+        }
+        .red{
+            border: 5px solid red;
+            font-size: 42px;
+        }
+        .blue{
+            border: 5px solid blue;
+            font-size: 42px;
+        }
+        div{
+            width: 100px;
+            height: 50px;
+            border: 2px solid #313030;
+            text-align: center;
+            line-height: 50px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+    </style>
+    <body>
+    <ul class="clearFix">
+        <li class="red"></li>
+        <li class="red"></li>
+        <li class="red"></li>
+        <li class="red"></li>
+        <li class="red"></li>
+        <li class="red"></li>
+        <li class="blue"></li>
+    </ul>
+    <div  id="btn">机选</div>
+
+
+    <script>
+        var oBtn = document.getElementById('btn');
+        var aLi = document.getElementsByTagName('li');
+
+        function getRandomColor() {
+            var str='0123456789abcdef';
+            var color='#';
+            for(var i=0;i<6;i++){
+                color+=str[Math.floor(Math.random()*16)]
+            }
+            return color;
+        }                                                      //随机颜色
+        var timer = null;
+        oBtn.onmouseenter=function(){
+            timer = setInterval(function(){
+                oBtn.style.backgroundColor=getRandomColor(); //调用getRandomColor()函数
+            },100)
+        };
+        oBtn.onmouseleave=function(){
+            clearInterval(timer);
+            oBtn.style.backgroundColor='#fff'
+        };                  //获取随机颜色，btn为跑马灯效果
+
+        function redBall(){
+            return Math.ceil(Math.random()*36);
+        }                                       //得到红球的随机数
+
+        function blueBall(){
+            return Math.ceil(Math.random()*16);
+        }                                       //得到蓝球的随机数
+
+        oBtn.onclick=function(){
+            var arr = [];
+            arr.length=0;  //清除数组中的元素
+
+            for(var i=0;i<6;i++){
+                var red = redBall();
+                if(arr.indexOf(red)+1){ //如果找到了
+                    i--;
+                }else{
+                    arr.push(red);
+                }                           //红球push
+                arr.sort(function(num1,num2){
+                    return num1-num2;
+                });                         //数组排序
+            }
+            arr.push(blueBall());       //蓝球push
+            for(var j=0;j<aLi.length;j++){
+                if(arr[j]<10){
+                    arr[j]='0'+arr[j];  //拼接'0'
+                }
+                aLi[j].innerHTML=arr[j];   //将随机数写入li中
+            }
+        }
+    </script>
+
+    </body>
+</html>
