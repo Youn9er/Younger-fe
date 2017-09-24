@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>1.2_多级导航菜单兼容IE6</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			a{
+				text-decoration:none;
+			}
+			ul,ol{
+				list-style: none;
+				/* clear: both; */		 
+				/* display: inline-block; */  /*可以解决高度塌陷问题 但父级宽度消失 */
+				/* overflow: hidden; */		/* 可以解决，但IE6不支持 */
+				/* clear: left; */		/* 给浮动元素父级和其同级元素设置clear属性 */
+			}
+
+			/* #menu > li{						>子代选择器，IE6不支持
+			 	width: 100px;
+			 	height: 50px;
+			 	margin-left:10px;
+			 	float:left;
+			 	background: gray;
+			 } */ 
+
+			#menu li{				 /* 内容溢出，IE6和主流浏览器处理方式不同，出现兼容问题 */
+				margin-right:10px;			
+				float: left; 
+
+			}
+			#menu .main-menu{		
+				width: 150px;
+				height: 50px;
+				line-height: 50px;
+				text-align:center;
+				display: block;
+				background:gray;
+			} 
+			#menu .sub-menu{
+				background: #ccc;
+				display: none;
+				width:150px;
+			}
+			#menu .sub-menu li{
+				width: 100%;			/* 问题：宽度150px时，sub-menu与其父级li宽度为160px,不设置宽度或者宽度为100%时，均为150px。 */
+				height: 50px;
+				line-height: 50px;
+				text-align:center;
+				border-bottom: 1px dotted #000;
+				float: none;
+			}
+			/* #menu > li:hover .sub-menu{		IE6既不支持li:hover,又不支持>子代选择器，兼容IE6用js 
+				display: block;
+			} */
+			/* 方法二： */
+			/* #menu .main-menu{
+				width: 100px;
+				height: 50px;
+				float:left;
+				margin-right:10px;
+				text-align: center;
+				line-height: 50px;
+			}
+			#menu .main-menu > a{
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			#menu .main-menu ul{
+				background:gray;
+			} */
+		</style>
+	</head>
+	<body>
+		<ul id="menu">
+			<li>
+				<a href="#"  class="main-menu">link 1</a>
+				<ul class="sub-menu">
+					<li><a href="#">sublink 1</a></li>
+					<li><a href="#">sublink 2</a></li>
+					<li><a href="#">sublink 3</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#"  class="main-menu">link 2</a>
+				<ul class="sub-menu">
+					<li><a href="#">sublink 4</a></li>
+					<li><a href="#">sublink 5</a></li>
+					<li><a href="#">sublink 6</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#"  class="main-menu">link 3</a>
+				<ul class="sub-menu">
+					<li><a href="#">sublink 7</a></li>
+					<li><a href="#">sublink 8</a></li>
+					<li><a href="#">sublink 9</a></li>
+				</ul>
+			</li>
+		</ul>
+
+		<script type="text/javascript">
+
+			//1.不考虑兼容：
+			/*var oMenu = document.getElementById('menu');
+			var aMainMenu = oMenu.getElementsByClassName('main-menu'); //IE8以下浏览器不支持
+			var aSubMenu = oMenu.getElementsByTagName('ul');
+			for(var i = 0;i<aMainMenu.length;i++){
+
+				aMainMenu[i].index = i;		//为每一个main-menu对象添加自定义属性
+				aMainMenu[i].onmouseover = function(){
+				  //aSubMenu[i].style.display = 'block';//cannot read property 'style' of undefined 异步
+					aSubMenu[this.index].style.display = 'block';
+				};
+				aMainMenu[i].onmouseout = function(){
+					//aSubMenu[i].style.display = 'none';	//cannot read property 'style' of undefined
+					aSubMenu[this.index].style.display = 'none';
+				};
+			}*/
+
+
+			//2.兼容，通过全局变量：
+			var oMenu = document.getElementById('menu');
+			var aMainMenu = oMenu.getElementsByTagName('a');	//支持IE。得到12个<a>	
+			var aSubMenu = oMenu.getElementsByTagName('ul');		
+			var count = 0;	//定义初始值为0的全局变量
+			for(var i =0;i<aMainMenu.length;i++){
+
+				if(aMainMenu[i].className =='main-menu'){	//找到class名为‘main-menu’的<a>
+					/*aMainMenu[i].index = i;
+					console.log(aMainMenu[i].index);*/		//0,4,8
+
+					aMainMenu[i].index = count++;			//通过全局变量建立索引值
+					
+					aMainMenu[i].onmouseover = function(){
+					/*aSubMenu[this.index].style.display = 'block';*///cannot read property 'style' of undefined
+					/*console.log(aSubMenu[this.index]);*/		//sublink1 sublink2 sublink3
+
+					aSubMenu[this.index].style.display = 'block';
+					};
+					aMainMenu[i].onmouseout = function(){
+					/*aSubMenu[this.index].style.display = 'none';*////cannot read property 'style' of undefined
+					aSubMenu[this.index].style.display = 'none';
+					}
+				}				
+			}
+
+			//3.通过children查找
+			/*var oMenu = document.getElementById('menu');
+			var aLi = oMenu.children;
+			console.log(aLi);	//[li,li,li]
+			for(var i=0;i<aLi.length;i++){
+                aLi[i].onmouseover = function(){
+                    //this.children[1].style.display = 'block';
+                    this.getElementsByTagName('ul')[0].style.display = 'block';
+				};
+                aLi[i].onmouseout = function(){
+                    //this.children[1].style.display = 'none';
+                    this.getElementsByTagName('ul')[0].style.display = 'none';
+				}
+			}*/
+		</script>
+	</body>
+</html>
