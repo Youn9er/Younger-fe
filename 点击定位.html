@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击定位</title>
+    <style>
+        div{
+            height: 500px;
+            margin: 20px 0;
+            border: 1px solid #7a6e6e;
+            text-align: center;
+            line-height: 500px;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        ul{
+            position: fixed;
+            top: 10%;
+            left: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+            width: 40px;
+            height: 40px;
+            margin: 1px 0;
+            background-color: #ff6f3d;
+            color: #313030;
+            text-align: center;
+            line-height: 40px;
+            border: 1px solid #ff6f3d;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        p{
+            height: 2000px;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 2000px;
+            border: 2px solid #090909;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color: #7a6e6e">服装</div>
+    <div style="background-color: #037ABC">家电</div>
+    <div style="background-color: #7a6e6e">生鲜</div>
+    <div style="background-color: #996600">手机</div>
+    <div style="background-color: #1123B4">电脑</div>
+    <div style="background-color: #A6A6A6">护肤</div>
+    <div style="background-color: #7a6e6e">厨具</div>
+    <div style="background-color: #037ABC">家居</div>
+    <div style="background-color: #7a6e6e">游戏</div>
+    <div style="background-color: #996600">汽车</div>
+    <div style="background-color: #1123B4">图书</div>
+    <div style="background-color: #A6A6A6">养生</div>
+    <p>底部</p>
+
+    <ul>
+        <li>服装</li>
+        <li>家电</li>
+        <li>生鲜</li>
+        <li>手机</li>
+        <li>电脑</li>
+        <li>护肤</li>
+        <li>厨具</li>
+        <li>家居</li>
+        <li>游戏</li>
+        <li>汽车</li>
+        <li>图书</li>
+        <li>养生</li>
+    </ul>
+
+    <script>
+        var aBtn=document.getElementsByTagName('li');
+        var aDiv=document.getElementsByTagName('div');
+        var timer=null;
+        for(var i=0;i<aBtn.length;i++){
+            aBtn[i].index=i;
+            aBtn[i].onclick=function(){
+                var _this=this;
+                clearInterval(timer);
+                timer=setInterval(function(){
+                    var oS=document.documentElement.scrollTop||document.body.scrollTop; //做兼容
+                    //document.documentElement.scrollTop=document.body.scrollTop=aDiv[_this.index].offsetTop;
+                    var iSpeed=8;
+
+                    if(oS<=aDiv[_this.index].offsetTop){
+                        document.documentElement.scrollTop=document.body.scrollTop=oS+iSpeed; //向下滚动
+
+                        if(oS>=aDiv[_this.index].offsetTop-iSpeed){
+                            clearInterval(timer);
+                        }
+                    }else{
+                        document.documentElement.scrollTop=document.body.scrollTop=oS-iSpeed; //向上滚动
+                        if(oS<=aDiv[_this.index].offsetTop+iSpeed){
+                            clearInterval(timer);
+                        }
+                    }
+                },5)
+            }
+        }
+
+    </script>
+</body>
+</html>
