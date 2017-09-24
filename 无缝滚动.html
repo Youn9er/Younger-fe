@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>无缝滚动</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <style>
+        div{
+            width: 400px;
+            height: 100px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border: 1px solid #313030;
+        }
+        ul{
+            position: absolute;
+            height: 100px;
+            padding: 0;
+
+        }
+        img{
+            width: 100px;
+            height: 100px;
+            display: block;
+        }
+        li{
+            list-style: none;
+            float: left;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li><img src="img/a.JPG"></li>
+        <li><img src="img/b.jpg"></li>
+        <li><img src="img/c.jpg"></li>
+        <li><img src="img/d.jpg"></li>
+        <li><img src="img/a.JPG"></li>
+        <li><img src="img/b.jpg"></li>
+        <li><img src="img/c.jpg"></li>
+        <li><img src="img/d.jpg"></li>
+    </ul>
+</div>
+
+<script>
+    var oUl=document.getElementsByTagName('ul')[0];
+    var aLi=oUl.getElementsByTagName('li');
+    var i=0;
+    var timer=null;
+
+    Roll();
+
+    oUl.style.width=aLi.length*aLi[0].offsetWidth+'px';
+    function Roll(){
+        timer = setInterval(function(){
+            if (i<=-aLi.length*aLi[0].offsetWidth/2){
+                i=0;
+            }
+            oUl.style.left=i+'px';
+            i--;
+        },10)
+    }                               //滚动函数
+
+    oUl.onmouseover=function(){
+        clearInterval(timer);
+    };                              //鼠标移入
+
+    oUl.onmouseout=function(){
+        Roll();
+    }                               //鼠标移出
+
+</script>
+</body>
+</html>
