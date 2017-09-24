@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,ul,li,p,html{
+	margin:0;
+	padding:0;
+}
+li{
+	list-style:none;
+}
+a{
+	color:#000000;
+}
+.clearFix{
+	overflow:auto;
+	height:1%;
+}
+img{
+	display: block;
+}
+
+	
+
