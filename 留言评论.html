@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言评论功能</title>
+    <style>
+        #txt{
+            width: 300px;
+            height: 200px;
+            resize:none;
+        }
+        li{
+            list-style: none;
+            width: 300px;
+            height: auto;
+            border: 1px solid #7a6e6e;
+            margin: 5px 0;
+        }
+        *{      /*通配符，*代表所有标签*/  /*ul *表示ul下面的所有标签*/
+            margin: 0;
+            padding: 0;
+        }
+        span{
+            cursor: pointer;
+            padding: 3px 5px;
+            float: right;
+        }
+        .clearfix{
+            overflow: auto;
+            height: 1%;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="txt"></textarea><br>
+    <input type="button"  id="btn" value="评论/留言">
+    <ul id="ul">
+        <li  id="a">默认内容<span id="spa">删除</span></li>
+    </ul>
+
+    <script>
+        var oTxt=document.getElementById('txt');
+        var oBtn=document.getElementById('btn');
+        var oUl=document.getElementById('ul');
+        /*var aS=document.getElementById('spa');*/
+        oBtn.onclick=function() {
+
+            var allLi=oUl.getElementsByTagName('li');
+            var aLi=document.createElement('li'); //document.createElement创建节点
+            aLi.setAttribute('class','clearfix');
+            aLi.innerHTML=oTxt.value+'<span>删除</span>'; //innerHTML为该元素下所有内容（包括该元素下的标签）
+            // innerTXT只是该元素下的文本；不建议写入标签，会清空其中所有标签并重新创建
+            var aS=oUl.getElementsByTagName('span');
+            if(allLi.length==0){
+                oUl.appendChild(aLi);
+            }else{
+                oUl.insertBefore(aLi,allLi[0]); //insertBefore将新节点插入到某一个东西前面
+            }
+            oTxt.value='';
+            for(var i=0;i<aS.length;i++){
+                aS[i].onclick=function() {
+                    this.parentNode.parentNode.removeChild(this.parentNode);
+                }
+            }
+
+        }
+
+
+
+    </script>
+
+</body>
+</html>
