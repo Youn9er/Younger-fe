@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        img{
+            position:absolute;
+            left:10px;
+            tOP:10px;
+
+            display:none;
+        }
+        .szimg{
+            position:relative;
+            left:0;
+            top:0;
+
+            width:15px;
+            height:15px;
+
+            display:inline;
+            cursor: pointer;
+
+        }
+        .szdiv{
+            position:absolute;
+            left:240px;
+            top:290px;
+        }
+    </style>
+    <script type="text/javascript">
+        function danj(i){
+            var imgArr=document.getElementsByTagName("img");
+            imgArr[0].style.displat="none";
+            imgArr[1].style.display="none";
+            imgArr[2].style.display="none";
+            imgArr[3].style.display="none";
+            imgArr[i].style.display="block";
+        }
+        var k=1;
+        function qiehuan(){
+            var imgArr=document.getElementsByTagName("img");
+            imgArr[0].style.displat="none";
+            imgArr[1].style.display="none";
+            imgArr[2].style.display="none";
+            imgArr[3].style.display="none";
+            imgArr[k].style.display="block";
+            k=k+1;
+            if(k==4){
+                k=0;
+            }
+        }
+        var jsq;
+        function zdqh(){
+            jsq=window.setInterval("qiehuan()",1000);
+        }
+        function ztqh(){
+            window.clearInterval(jsq)
+        }
+    </script>
+</head>
+    <body onload="zdqh()">
+    <div onmouseover="ztqh()"  onmouseout="zdqh()">
+            <img  id="tx"  src="a.JPG" border="0" style="display:block"/>
+            <img  id="ljj" src="b.jpg" border="0"/>
+            <img  id="wlh" src="c.jpg" border="0"/>
+            <img  id="js"  src="d.jpg" border="0"/>
+        <div class="szdiv">
+            <img src="1.jpg" border="0" class="szimg" onclick="danj(0)"/>
+            <img src="2.jpg" border="0" class="szimg" onclick="danj(1)"/>
+            <img src="3.jpg" border="0" class="szimg" onclick="danj(2)"/>
+            <img src="4.jpg" border="0" class="szimg" onclick="danj(3)"/>
+        </div>
+    </div>
+</body>
+</html>
