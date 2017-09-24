@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            height: 2000px;
+        }
+        #box{
+            width: 200px;
+            height: 300px;
+            border: 1px solid #000000;
+            background-color: #ff6f3d;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #header{
+            width: 100%;
+            height: 50px;
+            background-color: #313030;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="header"></div>
+    </div>
+
+    <script>
+        var oBox=document.getElementById('box');
+        var oHr=document.getElementById('header');
+
+        oHr.onmousedown=function(e) {
+
+            var e=e||event;
+            var hX=e.clientX-oBox.offsetLeft;
+            var hY=e.clientY-oBox.offsetTop;
+
+            var maxX = document.documentElement.clientWidth-oBox.offsetWidth;
+            var maxY = document.documentElement.clientHeight-oBox.offsetHeight;   //得到最大值即浏览器的边界
+
+            document.onmousemove=function(e){
+                var e=e||event;
+                var x=e.clientX-hX;
+                var y=e.clientY-hY;
+
+                if(x<=0){
+                    x=0;
+                }else if(x>=maxX){
+                    x=maxX;
+                };
+                if(y<=0){
+                    y=0;
+                }else if(y>=maxY){
+                    y=maxY;
+                }
+
+                oBox.style.left=x+'px';
+                oBox.style.top=y+'px';   //功能实现
+
+            };
+            document.onmouseup=function(){
+                document.onmousemove=null;   //抬起鼠标定位
+            }
+        }
+    </script>
+</body>
+</html>
