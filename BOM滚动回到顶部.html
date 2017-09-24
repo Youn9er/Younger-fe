@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOM滚动回到顶部</title>
+    <style>
+        div{
+            height: 200px;
+            margin: 20px 0;
+            border: 1px solid #7a6e6e;
+            font-size: 36px;
+            line-height: 200px;
+            text-align: center;
+            font-weight: bold;
+        }
+        input{
+            position: fixed;
+            top: 80%;
+            left: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!--或||的优先级:都是对的选最前面的；一对一错选对的；两个错为空；-->
+    <div style="background-color: #7a6e6e">1</div>
+    <div style="background-color: #037ABC">2</div>
+    <div style="background-color: #090909">3</div>
+    <div style="background-color: #996600">4</div>
+    <div style="background-color: #1123B4">5</div>
+    <div style="background-color: #A6A6A6">6</div>
+    <div style="background-color: #A61F21">7</div>
+    <div style="background-color: #CD686A">8</div>
+    <div style="background-color: #ff6f3d">9</div>
+    <div style="background-color: aqua">10</div>
+    <div style="background-color: #ff6f3d">11</div>
+    <div style="background-color: #CD686A">12</div>
+    <div style="background-color: #ff6f3d">13</div>
+    <div style="background-color: #1123B4">14</div>
+    <input type="button" value="回到顶部" id="btn">
+
+
+    <script>
+
+        var oBtn=document.getElementById('btn');
+
+        var aBody=document.getElementsByTagName('div');
+        var timer = null; /*考虑到js的作用域问题，在最外层先声明计时器*/
+
+        var isSys = true;
+        window.onscroll=function(){
+            if(!isSys){
+                clearInterval(timer); /*页面滚动正在滚动，当用户操作时停止滚动*/
+            }
+            isSys = false;
+        };
+        oBtn.onclick=function() {
+            timer =setInterval(function(){
+                var oscrollTop = document.documentElement.scrollTop||document.body.scrollTop; //获取卷去高度
+                var iSpeed = oscrollTop/8;  //滚动速度，目的添加动画效果
+                isSys = true;
+                if (oscrollTop<=0){
+                    window.clearInterval(timer);
+                }
+                document.documentElement.scrollTop=document.body.scrollTop = oscrollTop-iSpeed; //滚动
+            },40)
+        }
+    </script>
+</body>
+</html>
