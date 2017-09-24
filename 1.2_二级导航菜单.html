@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>1.2_多级导航菜单</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			a{
+				text-decoration:none;
+			}
+			ul,ol{
+				list-style: none;
+				/* clear: both; */		 
+				/* display: inline-block; */  /*可以解决高度塌陷问题 但父级宽度消失 */
+				/* overflow: hidden; */		/* 可以解决，但IE6不支持 */
+				/* clear: left; */		/* 给浮动元素父级和其同级元素设置clear属性 */
+			}
+
+			/* #menu > li{						>子代选择器，IE6不支持
+			 	width: 100px;
+			 	height: 50px;
+			 	margin-left:10px;
+			 	float:left;
+			 	background: gray;
+			 } */ 
+
+			#menu li{				 /* 内容溢出，IE6和主流浏览器处理方式不同，出现兼容问题 */
+				margin-right:10px;			
+				float: left; 
+
+			}
+			#menu .main-menu{		
+				width: 150px;
+				height: 50px;
+				line-height: 50px;
+				text-align:center;
+				display: block;
+				background:gray;
+			} 
+			#menu .sub-menu{
+				background: #ccc;
+				display: none;
+			}
+			#menu .sub-menu li{
+				width: 100%;			/* 问题：宽度150px时，sub-menu与其父级li宽度为160px,不设置宽度或者宽度为100%时，均为150px。 */
+				height: 50px;
+				line-height: 50px;
+				text-align:center;
+				border-bottom: 1px dotted #000;
+				float: none;
+			}
+			#menu > li:hover .sub-menu{		/* IE6既不支持li:hover,又不支持>子代选择器，兼容IE6用js */ 
+				display: block;
+			}
+			/* 方法二： */
+			/* #menu .main-menu{
+				width: 100px;
+				height: 50px;
+				float:left;
+				margin-right:10px;
+				text-align: center;
+				line-height: 50px;
+			}
+			#menu .main-menu > a{
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			#menu .main-menu ul{
+				background:gray;
+			} */
+		</style>
+	</head>
+	<body>
+		<ul id="menu">
+			<li>
+				<a href="#"  class="main-menu">link 1</a>
+				<ul class="sub-menu">
+					<li><a href="#">sublink 1</a></li>
+					<li><a href="#">sublink 1</a></li>
+					<li><a href="#">sublink 1</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#"  class="main-menu">link 2</a>
+				<ul class="sub-menu">
+					<li><a href="#">sublink 1</a></li>
+					<li><a href="#">sublink 1</a></li>
+					<li><a href="#">sublink 1</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#"  class="main-menu">link 3</a>
+				<ul class="sub-menu">
+					<li><a href="#">sublink 1</a></li>
+					<li><a href="#">sublink 1</a></li>
+					<li><a href="#">sublink 1</a></li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
