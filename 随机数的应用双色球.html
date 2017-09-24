@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>随机数的应用双色球</title>
+    <style>
+        body,ul,li,p,html{
+            margin:0;
+            padding:0;
+        }
+        li{
+            list-style:none;
+        }
+        a{
+            color:#000000;
+        }
+        .clearfix{
+            overflow:auto;
+            height:1%;
+        }
+        li{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            float: left;
+            margin: 15px;
+            text-align: center;
+            line-height: 150px;
+        }
+        .red{
+            border: 5px solid red;
+            font-size: 42px;
+        }
+        .blue{
+            border: 5px solid blue;
+            font-size: 42px;
+        }
+        div{
+            width: 100px;
+            height: 50px;
+            border: 2px solid #313030;
+            text-align: center;
+            line-height: 50px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<ul class="clearfix">
+    <li class="red"></li>
+    <li class="red"></li>
+    <li class="red"></li>
+    <li class="red"></li>
+    <li class="red"></li>
+    <li class="red"></li>
+    <li class="blue"></li>
+</ul>
+<div  id="btn">机选</div>
+
+<script>
+    var oBtn=document.getElementById('btn');
+    var aLi=document.getElementsByTagName('li');
+    /*var RedNum = Math.round(Math.random()*36);
+    var BlueNum = Math.round(Math.random()*16);*/
+
+    /*var RedNum = Math.round(Math.random()*36);
+    var BlueNum = Math.round(Math.random()*16);
+    console.log(RedNum);
+    console.log(BlueNum);*/
+
+    oBtn.onclick=function(){
+        var timer = setInterval(function () {
+            for (var i = 0; i <= 5; i++) {
+                var RedNum = Math.ceil(Math.random() * 36);
+                var BlueNum = Math.ceil(Math.random() * 16);
+                aLi[i].innerHTML = '';
+                aLi[i].innerHTML = RedNum;
+            }
+            aLi[6].innerHTML = '';
+            aLi[6].innerHTML = BlueNum;
+        }, 100);
+    };
+
+
+</script>
+</body>
+</html>
