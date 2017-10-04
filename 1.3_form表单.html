@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>1.3_form表单</title>
+	</head>
+	<body>
+		<form action="" method="post" id="form">
+			<label for="usd">用户名：</label>
+			<input type="text" name="username" id="usd">
+			<br>
+			<label for="psd">密码：</label>
+			<input type="password" name="password" id="psd">
+			<br>
+			性别：
+				<label for="male">男</label>
+				<input type="radio" name="sex" id="male">
+				<label for="female">女</label>
+				<input type="radio" name="sex" id="female">
+				<br>
+			爱好：
+				<label for="basketball">篮球</label>
+				<input type="checkbox" name="hobby" id="basketball">
+				<label for="football">足球</label>
+				<input type="checkbox" name="hobby" id="football">
+				<label for="volleyball">排球</label>
+				<input type="checkbox" name="hobby" id="volleyball">
+				<br>
+			学校：
+				<select name="school" id="school">
+					<option>东北林业大学</option>
+					<option>黑龙江大学</option>
+					<option>哈尔滨工程大学</option>
+				</select>
+				<br>
+			<input type="submit" name="submit" id="submit">	
+
+			<script type="text/javascript">
+				var oSubmit = document.querySelector("#submit");
+				var oForm =document.querySelector("#form");
+				var oSex = oForm.sex,
+					oHobby = oForm.hobby;
+
+				var sex = "",
+					hobby = "";
+				oSubmit.addEventListener("click", function(e){
+					for(var i=0;i<oSex.length;i++){
+						if(oSex[i].checked){
+							sex = oSex[i];
+						}							//得到选中状态下的性别
+					}
+					for(var j=0;j<oHobby.length;j++){
+						if(oHobby[j].checked){
+							hobby = oHobby[i];
+						}							//得到选中状态下的爱好
+					}
+					console.log({
+						username: oForm.username.value,
+						password: oForm.password.value,
+						sex: sex,
+						hobby: hobby,
+						school: oForm.school.value,
+					});
+					e.preventDefault();  //阻止默认事件
+					/*return false;*/ //addEventListener不能用此方法阻止默认事件
+				},false);		//addEventListener正确的打开方式~~
+			</script>
+		</form>
+	</body>
+</html>
