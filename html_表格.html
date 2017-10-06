@@ -3,11 +3,26 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>html_表格</title>
+		<style type="text/css">
+			table, th, td{
+				border: 2px solid #0f0;
+			}
+			table {
+				width: 500px;
+				height: 500px;
+				text-align: center;
+				border-collapse: collapse; /* 将表格边框折叠为单一边框 */
+			}
+			th {
+				width: 500px;
+				height: 100px;		/* 表格内部th td 均可独立设置样式 */
+			}
+		</style>
 	</head>
 	<body>
-		 <table border="1">
-		 	<th>Younger</th>				<!-- <th></th>表头 -->
-		 	<th>Taozi</th>
+		<table border="1">
+			<th>Younger</th>				<!-- <th></th>表头 -->
+			<th>Taozi</th>
 			<tr>							<!-- <tr></tr> 行 -->
 				<td>row 1, cell 1</td>
 				<td >row 1, cell 2</td>		<!-- <td></td> 列 -->
@@ -17,7 +32,7 @@
 				<td>row 2, cell 1</td>
 				<td colspan="2">row 2, cell 2</td>  <!-- colspan合并列 -->
 			</tr>
-		</table> 
+		</table>
 
 		<!-- <table border="1">
 			<tr>
