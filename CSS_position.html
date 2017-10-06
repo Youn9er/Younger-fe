@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS_定位</title>
+		<style type="text/css">
+			div {
+				width: 200px;
+				height: 200px;
+				display: inline;	/* 转换为行内元素 */
+				display: inline-block;  /* 转换为行内块级元素 */
+			}
+			#div1 {
+				background: #000;
+			}
+			#div2 {
+				background: #0f0;
+				position: relative;
+				top: 20px;
+				left: 20px;    /* 相对于自身定位，无论是否进行移动，元素仍然占据原来的空间。因此，移动元素会导致它覆盖其它框。 */
+			}
+			#div3 {
+				background: #00f;
+				position: absolute;
+				top: 20px;
+				left: 20px; /* 空间释放。1.绝对定位的元素的位置相对于最近的已定位祖先元素，如果元素没有已定位的祖先元素，那么它的位置相对于最初的包含块。
+				2.绝对定位的元素框从文档流完全删除，并相对于其包含块定位,元素原先在正常文档流中所占的空间会关闭，就好像该元素原来不存在一样。元素定位后生成一个块级框，而不论原来它在正常流中生成何种类型的框。 */
+			}
+			#div4 {
+				background: #f00;	
+			}
+			a {
+				background: gray;
+				display: block;  /* 转换为块级元素 */
+				width: 200px;
+				height: 200px;
+			}
+			/* #container {
+				width: 400px;
+				height: 400px;
+				overflow: hidden;
+				border: 1px solid transparent;	解决内部盒子出现下面所述问题的方法
+				padding: 1px;
+				background: #f00;
+			}
+			#box {
+				width: 200px;
+				height: 200px;
+				margin-top: 20px;	一个盒子包裹另一个盒子，当父级盒子没有设置border和padding时，里边盒子的设置的上边距不会起作用。
+				background: #0f0;
+			} */
+		</style>
+	</head>
+	<body>
+		<!-- <div id="container">
+			<div id="box">box</div>
+		</div> -->
+
+		<div id="div1">div1</div>
+		<div id="div2">div2</div>
+		<div id="div3">div3</div>
+		<div id="div4">div4</div>
+		<a href="#">link 1</a>
+	</body>
+</html>
