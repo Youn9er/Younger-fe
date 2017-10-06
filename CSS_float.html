@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS_浮动</title>
+		<style type="text/css">
+			div {
+				width: 200px;
+				height: 200px;
+				/* float: left;
+				float: right; */
+			}
+			/* #div1 {
+				background: #f00;
+				float: left;
+			}
+			#div2 {
+				background: #00f;
+			}
+			#div3 {
+				background: #0f0;
+			} */
+			#text {
+				background: #f00;
+				float: left;	/* 利用浮动做文字环绕效果 */
+			}
+			p {
+				clear: left;	/* 阻止行框围绕浮动框，需要对该框应用 clear 属性。clear 属性的值可以是 left、right、both 或 none，它表示框的哪些边不应该挨着浮动框。 */
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。
+		由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样。 -->
+
+		<!-- <div id="div1"></div>
+		<div id="div2"></div>
+		<div id="div3"></div> -->
+
+		<!-- 浮动框旁边的行框被缩短，从而给浮动框留出空间，行框围绕浮动框。
+		因此，创建浮动框可以使文本围绕图像 -->
+		<div id="text"></div>
+		
+			<p>pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+		
+	</body>
+</html>
