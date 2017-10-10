@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS_margin的一些小问题</title>
+		<style type="text/css">
+			#container {
+				width: 400px;
+				height: 400px;
+				background: #f00;
+
+				/*overflow: hidden; /* 解决子元素margin-top失效问题方法1 */
+				border: 1px solid transparent;	/* 解决子元素margin-top失效问题方法2 */
+			}
+			#box {
+				width: 200px;
+				height: 200px;
+				background: #00f;
+				margin-top: 100px;	/* 单独设置margin-top时，父元素会跟着子元素一起掉下去 */
+			}
+
+
+			/* 两个兄弟元素，如果其中一个的下外边距为x，另一个的上外边距为y，那么他们两个之间的距离并不是x+y的值，而是会取max(x,y)的值。 如下面例子中，间距为100px，而不是150px。*/
+			#div1 {
+				width: 200px;		
+				height: 200px;
+				background: #f00;
+				margin-bottom: 50px;
+			}
+			#div2 {
+				width: 200px;
+				height: 200px;
+				background: #0f0;
+				margin-top: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div id="box"></div>
+		</div>
+
+		<div id="div1"></div>
+		<div id="div2"></div>
+	</body>
+</html>
