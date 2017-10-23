@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>1.4折叠菜单</title>
+      <link rel="stylesheet" href="../CSS通配样式/Normalize.css">
+      <style>
+          ul {
+              list-style: none;
+          }
+          #menu {
+              width: 200px;
+          }
+          a[class=main-menu] {
+              width: 200px;
+              height: 30px;
+              display: block;
+              text-decoration: none;
+              color: #fff;
+              font-size: 20px;
+              line-height: 30px;
+              background: #000;
+          }
+          .show {
+              display: block;
+          }
+          .hidden {
+              display: none;
+          }
+      </style>
+    </head>
+    <body>
+        <ul id="menu">
+            <li>
+                <a href="#" class="main-menu">管理区</a>
+                <ul id="sub-menu" class="show hidden">
+                    <li><a href="#">001</a></li>
+                    <li><a href="#">002</a></li>
+                    <li><a href="#">003</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="main-menu">交流区</a>
+                <ul id="sub-menu" class="show hidden">
+                    <li><a href="#">001</a></li>
+                    <li><a href="#">002</a></li>
+                    <li><a href="#">003</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <script type="text/javascript">
+            var aMainMenu = document.querySelectorAll(".main-menu");
+            var aSubMenu = document.querySelectorAll("#sub-menu");
+            console.log(aSubMenu);
+            var count = 0;
+            for(var i = 0; i<aMainMenu.length; i++){
+                aMainMenu[i].index = count++;
+                aMainMenu[i].onclick = function(){
+                    if (aSubMenu[this.index].className == "show") {
+                        aSubMenu[this.index].className = "hidden";
+                    } else {
+                        aSubMenu[this.index].className = "show";
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
