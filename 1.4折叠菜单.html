@@ -55,7 +55,7 @@
             console.log(aSubMenu);
             var count = 0;
             for(var i = 0; i<aMainMenu.length; i++){
-                aMainMenu[i].index = count++;
+                aMainMenu[i].index = count++;   //自定义属性
                 aMainMenu[i].onclick = function(){
                     if (aSubMenu[this.index].className == "show") {
                         aSubMenu[this.index].className = "hidden";
